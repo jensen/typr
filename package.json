@@ -1,0 +1,44 @@
+{
+  "private": true,
+  "name": "typr",
+  "description": "",
+  "license": "NO LICENSE",
+  "scripts": {
+    "build": "remix build",
+    "dev": "remix dev",
+    "postinstall": "remix setup node",
+    "start": "remix-serve build",
+    "watch:css": "postcss styles --base styles --dir src/styles -w",
+    "build:css": "postcss styles --base styles --dir src/styles --env production"
+  },
+  "dependencies": {
+    "@remix-run/react": "^0.21.0",
+    "@remix-run/serve": "^0.21.0",
+    "@supabase/supabase-js": "^1.28.1",
+    "@xstate/inspect": "^0.5.2",
+    "@xstate/react": "^1.6.3",
+    "classnames": "^2.3.1",
+    "date-fns": "^2.26.0",
+    "dotenv": "^10.0.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-router-dom": "^6.0.2",
+    "remix": "^0.21.0",
+    "use-editable": "^2.3.3",
+    "xstate": "^4.26.1"
+  },
+  "devDependencies": {
+    "@remix-run/dev": "^0.21.0",
+    "@types/react": "^17.0.24",
+    "@types/react-dom": "^17.0.9",
+    "autoprefixer": "^10.4.0",
+    "postcss": "^8.3.11",
+    "postcss-cli": "^9.0.2",
+    "tailwindcss": "^2.2.19",
+    "typescript": "^4.1.2"
+  },
+  "engines": {
+    "node": ">=14"
+  },
+  "sideEffects": false
+}
