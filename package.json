@@ -4,7 +4,7 @@
   "description": "",
   "license": "NO LICENSE",
   "scripts": {
-    "build": "remix build",
+    "build": "npm run build:css && remix build",
     "dev": "remix watch",
     "postinstall": "remix setup node",
     "start": "remix-serve build",
