@@ -26,7 +26,7 @@ import stylesUrl from "./styles/global.css";
 export let meta: MetaFunction = () => {
   return {
     title: "typr.",
-    description: "https://github.com/jensen/typing-tutor",
+    description: "https://github.com/jensen/typr",
     viewport: "width=device-width, initial-scale=1",
   };
 };
