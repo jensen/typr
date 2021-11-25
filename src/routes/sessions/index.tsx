@@ -5,6 +5,7 @@ import cx from "classnames";
 import { withAuth, AuthedLoaderFunction } from "~/utils/auth";
 import { definitions } from "~/services/types/supabase";
 
+import SessionTitle from "~/components/SessionTitle";
 import { StatPill } from "~/components/common/StatPill";
 import { LinkButton } from "~/components/common/Button";
 import useSessionResults from "~/hooks/useSessionResults";
@@ -46,11 +47,7 @@ const SessionItem = (props: ISessionItemProps) => {
 
   return (
     <li className="flex flex-col space-y-2">
-      <h3 className="text-2xl font-bold uppercase">
-        <span className="bg-gradient-to-r from-gray-700 to-green-400 bg-clip-text text-transparent">
-          {props.session.title}
-        </span>
-      </h3>
+      <SessionTitle>{props.session.title}</SessionTitle>
       <div className="flex flex-col sm:space-x-2 sm:flex-row space-y-2 sm:space-y-0">
         <div className={cx("flex-1", { "opacity-30": best === undefined })}>
           <StatPill label={best?.attempter.name} value={best?.wpm} />

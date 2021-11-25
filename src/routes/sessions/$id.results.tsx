@@ -9,7 +9,7 @@ import {
 import { definitions } from "~/services/types/supabase";
 
 import useSessionResults from "~/hooks/useSessionResults";
-
+import SessionTitle from "~/components/SessionTitle";
 import { LinkButton } from "~/components/common/Button";
 import { StatPill } from "~/components/common/StatPill";
 
@@ -106,6 +106,7 @@ export default function SessionResults() {
 
   return (
     <div className="w-96 p-4 flex flex-col space-y-2">
+      <SessionTitle>{session.title}</SessionTitle>
       {mine ? <UserResult missed={mine.missed} wpm={mine.wpm} /> : <p></p>}
       <LinkButton to={`/sessions/${id}`} intent="secondary">
         {mine ? "Try Again" : "Make Attempt"}
