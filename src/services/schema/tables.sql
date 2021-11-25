@@ -50,7 +50,8 @@ create table sessions (
   id uuid default extensions.uuid_generate_v4() primary key,
   created_at timestamp with time zone default timezone('utc'::text, now()) not null,
   updated_at timestamp with time zone default timezone('utc'::text, now()) not null,
-
+  
+  title text not null,
   lines json not null,
   
   user_id uuid default auth.uid() not null,
