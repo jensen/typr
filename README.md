@@ -6,6 +6,8 @@ I was able to get some code examples from @fergus on the Remix discord server wh
 
 ## Demo
 
+https://user-images.githubusercontent.com/14803/143400503-9fc6a3f2-8019-4cae-9c16-216cb0613b0c.mp4
+
 [https://typr-group-learn.netlify.app/](https://typr-group-learn.netlify.app/)
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/7ebd59d9-9d26-458b-99e4-69c1c8a26a34/deploy-status)](https://app.netlify.com/sites/typr-group-learn/deploys)
