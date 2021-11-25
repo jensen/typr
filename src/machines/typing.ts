@@ -1,15 +1,6 @@
 import { useMachine } from "@xstate/react";
 import { createMachine, assign } from "xstate";
 
-const lines = [
-  "The Atlantic was born today, and I'll tell you how",
-  "The clouds above opened up and let it out",
-  "I was standing on the surface of a perforated sphere",
-  "When the water filled every hole",
-  "And thousands upon thousands made an ocean",
-  "Making islands where no island should go",
-];
-
 const guards = {
   isEndOfLine: (context: ITypingMachineContext, event) => {
     return event.input.length > context.lines[context.currentLine].length - 1;
@@ -17,7 +8,7 @@ const guards = {
   isLineComplete: (context: ITypingMachineContext, event) => {
     return (
       guards.isEndOfLine(context, event) &&
-      event.input === context.lines[context.currentLine]
+      event.input.slice(0, -1) === context.lines[context.currentLine]
     );
   },
   isEndOfLastLine: (context: ITypingMachineContext, event) => {
@@ -43,8 +34,8 @@ const typingMachine = createMachine<ITypingMachineContext>(
     id: "typr",
     initial: "created",
     context: {
-      lines,
-      typed: lines.map(() => ""),
+      lines: [""],
+      typed: [""],
       currentPosition: 0,
       currentLine: 0,
       mistakeCount: 0,

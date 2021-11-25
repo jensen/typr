@@ -13,7 +13,7 @@ const TypingInput = (props: ITypingInputProps) => {
   const editorRef = React.useRef<HTMLDivElement>(null);
 
   const onEditableChange = (input, { position }) => {
-    props.onInput(input.slice(0, -1), position);
+    props.onInput(input.slice(0), position);
   };
 
   useEditable(editorRef, onEditableChange, { onReturn: () => null });
@@ -28,12 +28,15 @@ const TypingInput = (props: ITypingInputProps) => {
       onClick={() => editorRef.current?.focus()}
     >
       <div
-        className="absolute"
+        className="absolute text-white"
         contentEditable
         suppressContentEditableWarning
         spellCheck={false}
         ref={editorRef}
       >
+        {props.input}
+      </div>
+      {/* <div className="absolute z-10 bg-black">
         {props.input.split("").map((char, index) => (
           <span
             key={index}
@@ -45,16 +48,28 @@ const TypingInput = (props: ITypingInputProps) => {
             {char}
           </span>
         ))}
-      </div>
+      </div> */}
       <div>
         {props.line.split("").map((char, index) => (
           <span
             key={index}
             className={cx("transition-opacity duration-300", {
-              "opacity-0": index < props.position,
+              "text-white bg-red-400":
+                index < props.position &&
+                props.line[index] !== props.input[index],
+              "text-white bg-black":
+                index < props.position &&
+                props.line[index] === props.input[index],
             })}
           >
-            {char}
+            <span
+              className={cx("transition-opacity duration-300", {
+                "opacity-0": index < props.position,
+                "opacity-70": index >= props.position,
+              })}
+            >
+              {char}
+            </span>
           </span>
         ))}
       </div>
