@@ -42,19 +42,6 @@ const typingMachine = createMachine<ITypingMachineContext>(
       timeStarted: 0,
       timeEnded: 0,
     },
-    on: {
-      RESET: {
-        target: "created",
-        actions: assign((context, event) => ({
-          typed: context.lines.map(() => ""),
-          currentPosition: 0,
-          currentLine: 0,
-          mistakeCount: 0,
-          timeStarted: 0,
-          timeEnded: 0,
-        })),
-      },
-    },
     states: {
       created: {
         invoke: {
@@ -82,7 +69,17 @@ const typingMachine = createMachine<ITypingMachineContext>(
           timeStarted: new Date().getTime(),
         })),
         on: {
-          START: "created",
+          RESET: {
+            target: "created",
+            actions: assign((context, event) => ({
+              typed: context.lines.map(() => ""),
+              currentPosition: 0,
+              currentLine: 0,
+              mistakeCount: 0,
+              timeStarted: 0,
+              timeEnded: 0,
+            })),
+          },
           INPUT: [
             {
               target: "results",
@@ -97,18 +94,16 @@ const typingMachine = createMachine<ITypingMachineContext>(
             },
             {
               actions: assign((context, event) => {
+                /* long way to get the two characters we need to compare */
                 const current =
                   context.lines[context.currentLine][context.currentPosition];
                 const newest = event.input[context.currentPosition];
 
-                const mistakeCount = {
+                /* add one to the mistake count if they aren't the same */
+                return {
                   mistakeCount:
                     context.mistakeCount +
                     (newest && current !== newest ? 1 : 0),
-                };
-
-                return {
-                  ...mistakeCount,
                   typed: context.typed.map((line, index) =>
                     index === context.currentLine ? event.input : line
                   ),
