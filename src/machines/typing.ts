@@ -42,6 +42,19 @@ const typingMachine = createMachine<ITypingMachineContext>(
       timeStarted: 0,
       timeEnded: 0,
     },
+    on: {
+      RESET: {
+        target: "created",
+        actions: assign((context, event) => ({
+          typed: context.lines.map(() => ""),
+          currentPosition: 0,
+          currentLine: 0,
+          mistakeCount: 0,
+          timeStarted: 0,
+          timeEnded: 0,
+        })),
+      },
+    },
     states: {
       created: {
         invoke: {

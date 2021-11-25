@@ -10,7 +10,7 @@ import { definitions } from "~/services/types/supabase";
 
 import useSessionResults from "~/hooks/useSessionResults";
 
-import { Button } from "~/components/common/Button";
+import { LinkButton } from "~/components/common/Button";
 import { StatPill } from "~/components/common/StatPill";
 
 const handleAction: AuthedActionFunction = ({ request, params, supabase }) => {
@@ -107,11 +107,9 @@ export default function SessionResults() {
   return (
     <div className="w-96 p-4 flex flex-col space-y-2">
       {mine ? <UserResult missed={mine.missed} wpm={mine.wpm} /> : <p></p>}
-      <Link to={`/sessions/${id}`}>
-        <Button intent="secondary">
-          {mine ? "Try Again" : "Make Attempt"}
-        </Button>
-      </Link>
+      <LinkButton to={`/sessions/${id}`} intent="secondary">
+        {mine ? "Try Again" : "Make Attempt"}
+      </LinkButton>
       {top.length > 0 && <Top5Results attempts={top} />}
     </div>
   );

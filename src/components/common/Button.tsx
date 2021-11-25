@@ -1,8 +1,9 @@
 import React from "react";
+import { Link } from "remix";
 import cx from "classnames";
 import { Spinner } from "~/components/common/Loading";
 
-interface IButton
+interface IButtonProps
   extends React.DetailedHTMLProps<
     React.ButtonHTMLAttributes<HTMLButtonElement>,
     HTMLButtonElement
@@ -12,13 +13,28 @@ interface IButton
   sm?: boolean;
 }
 
+interface ILinkButtonProps extends IButtonProps {
+  to: string;
+}
+
+export function LinkButton(props: ILinkButtonProps) {
+  if (props.to && !props.disabled) {
+    return (
+      <Link to={props.to} className="w-full">
+        <Button {...props}>{props.children}</Button>
+      </Link>
+    );
+  }
+  return <Button {...props}>{props.children}</Button>;
+}
+
 export function Button({
   className,
   intent,
   busy = false,
   sm = false,
   ...props
-}: IButton) {
+}: IButtonProps) {
   return (
     <button
       className={cx(

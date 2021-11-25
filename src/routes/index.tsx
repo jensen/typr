@@ -1,7 +1,7 @@
-import type { LinksFunction, LoaderFunction } from "remix";
+import { LinksFunction, LoaderFunction, useLoaderData } from "remix";
 import { json } from "remix";
-import { Link } from "react-router-dom";
-import { Button } from "~/components/common/Button";
+import { LinkButton } from "~/components/common/Button";
+import { DiscordLoginButton } from "~/components/DiscordLoginButton";
 import { withAuth, AuthedLoaderFunction } from "~/utils/auth";
 
 import stylesUrl from "../styles/index.css";
@@ -18,17 +18,30 @@ const handleLoad: AuthedLoaderFunction = ({ response: { data, headers } }) =>
 export let loader: LoaderFunction = withAuth(handleLoad);
 
 export default function Index() {
+  let data = useLoaderData();
+
   return (
-    <div className="flex flex-col items-center space-y-4">
+    <div className="flex flex-col items-center space-y-8">
       <h3 className="text-2xl mb-8 font-light">
-        Welcome to <span className="font-black">typr.</span>
+        <span className="font-light">welcome to </span>
+        <span className="font-black">typr.</span>
       </h3>
-      <Link to="/sessions">
-        <Button intent="secondary">View Sessions</Button>
-      </Link>
-      <Link to="/sessions/new">
-        <Button intent="primary">Start Session</Button>
-      </Link>
+      <LinkButton to="/sessions" intent="secondary">
+        View Sessions
+      </LinkButton>
+      {data.user && (
+        <LinkButton to="/sessions/new" intent="primary">
+          Create Session
+        </LinkButton>
+      )}
+      {data.user === null && (
+        <>
+          <DiscordLoginButton />{" "}
+          <p className="text-xs text-gray-400">
+            Must login to create a session or save results.
+          </p>
+        </>
+      )}
     </div>
   );
 }

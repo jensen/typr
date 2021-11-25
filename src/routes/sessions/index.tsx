@@ -1,17 +1,16 @@
 import type { LoaderFunction } from "remix";
 import { useLoaderData, json } from "remix";
-import { Link } from "react-router-dom";
 import { format } from "date-fns";
 import cx from "classnames";
 import { withAuth, AuthedLoaderFunction } from "~/utils/auth";
 import { definitions } from "~/services/types/supabase";
 
 import { StatPill } from "~/components/common/StatPill";
-import { Button } from "~/components/common/Button";
+import { LinkButton } from "~/components/common/Button";
 import useSessionResults from "~/hooks/useSessionResults";
 
 type ISession = definitions["sessions"];
-type ISessionWithAttempts = definitions["sessions"] & {
+type ISessionWithAttempts = ISession & {
   user: definitions["profiles"];
   attempts: definitions["attempts"][];
 };
@@ -53,18 +52,21 @@ const SessionItem = (props: ISessionItemProps) => {
         </span>
       </h3>
       <div className="flex flex-col sm:space-x-2 sm:flex-row space-y-2 sm:space-y-0">
-        <div className={cx("flex-1", { "opacity-30": !best })}>
+        <div className={cx("flex-1", { "opacity-30": best === undefined })}>
           <StatPill label={best?.attempter.name} value={best?.wpm} />
         </div>
         <div className="flex flex-col space-y-2">
-          <Link to={props.session.id}>
-            <Button sm intent="secondary">
-              Make Attempt
-            </Button>
-          </Link>
-          <Button sm intent="primary" disabled={best === undefined}>
-            <Link to={`${props.session.id}/results`}>View Results</Link>
-          </Button>
+          <LinkButton to={props.session.id} sm intent="secondary">
+            Make Attempt
+          </LinkButton>
+          <LinkButton
+            to={`${props.session.id}/results`}
+            sm
+            intent="primary"
+            disabled={best === undefined}
+          >
+            View Results
+          </LinkButton>
         </div>
       </div>
       <div className="flex justify-end">

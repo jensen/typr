@@ -17,7 +17,7 @@ export default function useSessionResults(session) {
   const top = [...attempts]
     .sort((l, r) => r.wpm - l.wpm || l.missed - r.missed)
     .slice(0, 5);
-  const mine = recent.find((attempt) => attempt.user_id === user.id);
+  const mine = recent.find((attempt) => attempt.user_id === user?.id);
 
   return {
     top,

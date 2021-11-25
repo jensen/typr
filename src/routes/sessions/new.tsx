@@ -72,6 +72,7 @@ export default function CreateSession() {
   return (
     <div className="w-96">
       <Form method="post" className="flex flex-col space-y-2">
+        <input name="title" />
         {lines.map((line, index) => (
           <LineInput key={index} index={index} />
         ))}

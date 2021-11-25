@@ -1,12 +1,13 @@
 import type { LoaderFunction } from "remix";
 import { useSubmit, useLoaderData, json } from "remix";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { withAuth, AuthedLoaderFunction } from "~/utils/auth";
 import TypingInput from "~/components/TypingInput";
 import { Spinner } from "~/components/common/Loading";
 import { definitions } from "~/services/types/supabase";
 import { useTypingMachine } from "~/machines/typing";
 import { StatPill } from "~/components/common/StatPill";
+import { Button } from "~/components/common/Button";
 import { calculateCompletedWords } from "~/utils/calculations";
 
 const handleLoad: AuthedLoaderFunction = ({
@@ -34,7 +35,9 @@ const handleLoad: AuthedLoaderFunction = ({
 export let loader: LoaderFunction = withAuth(handleLoad);
 
 export default function Session() {
+  const { user } = useLoaderData();
   const { id } = useParams();
+  const navigate = useNavigate();
   const submit = useSubmit();
 
   const { session } = useLoaderData<{
@@ -53,21 +56,29 @@ export default function Session() {
       typed: session.lines.map((line) => ""),
     },
     actions: {
-      submitResults: (context, event) =>
-        submit(
-          {
-            seconds: String(
-              Math.round((context.timeEnded - context.timeStarted) / 1000)
-            ),
-            missed: context.mistakeCount,
-            words: String(calculateCompletedWords(context)),
-          },
-          { method: "post", action: `/sessions/${id}/results` }
-        ),
+      submitResults: (context, event) => {
+        const seconds = String(
+          Math.round((context.timeEnded - context.timeStarted) / 1000)
+        );
+        const words = String(calculateCompletedWords(context));
+        const missed = context.mistakeCount;
+
+        const params = {
+          seconds,
+          missed,
+          words,
+        };
+
+        if (user) {
+          submit(params, { method: "post", action: `/sessions/${id}/results` });
+        } else {
+          navigate(`practice?${new URLSearchParams(params).toString()}`);
+        }
+      },
     },
   });
 
-  if (state.matches("results")) {
+  if (state.matches("results") && user) {
     return (
       <div className="px-8 py-2 rounded-full flex justify-center items-center bg-green-400 space-x-4">
         <Spinner show />
@@ -99,6 +110,9 @@ export default function Session() {
             )
           )}
         </div>
+        <Button intent="danger" onClick={() => send("RESET")}>
+          Reset
+        </Button>
       </div>
     );
   }

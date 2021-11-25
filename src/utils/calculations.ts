@@ -19,14 +19,6 @@ export const calculateCompletedWords = ({
   );
 };
 
-export const calculateWordsPerMinute = ({
-  timeStarted,
-  timeEnded,
-  wordCount,
-}: Pick<ITypingMachineContext, "timeStarted" | "timeEnded"> & {
-  wordCount: number;
-}) => {
-  return Math.round(
-    (wordCount / Math.round((timeEnded - timeStarted) / 1000)) * 60
-  );
+export const calculateWordsPerMinute = (seconds: number, words: number) => {
+  return Math.round((words / seconds) * 60);
 };
