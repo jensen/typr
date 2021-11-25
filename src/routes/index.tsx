@@ -18,23 +18,23 @@ const handleLoad: AuthedLoaderFunction = ({ response: { data, headers } }) =>
 export let loader: LoaderFunction = withAuth(handleLoad);
 
 export default function Index() {
-  let data = useLoaderData();
+  let { user } = useLoaderData();
 
   return (
-    <div className="flex flex-col items-center space-y-8">
-      <h3 className="text-2xl mb-8 font-light">
+    <div className="flex flex-col items-center space-y-4">
+      <h3 className="text-3xl mb-8 font-light">
         <span className="font-light">welcome to </span>
         <span className="font-black">typr.</span>
       </h3>
-      <LinkButton to="/sessions" intent="secondary">
+      <LinkButton to="sessions" intent="secondary">
         View Sessions
       </LinkButton>
-      {data.user && (
-        <LinkButton to="/sessions/new" intent="primary">
+      {user && (
+        <LinkButton to="sessions/new" intent="primary">
           Create Session
         </LinkButton>
       )}
-      {data.user === null && (
+      {user === null && (
         <>
           <DiscordLoginButton />{" "}
           <p className="text-xs text-gray-400">
