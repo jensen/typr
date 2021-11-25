@@ -20,7 +20,7 @@ export default function SessionPractice(props) {
             {wpm}
           </div>
         </div>
-        <div className="flex-1 pl-4 flex justify-center items-center font-black text-4xl uppercase">
+        <div className="flex-1 pl-4 flex justify-center items-center font-black text-2xl uppercase">
           Words Per Minute
         </div>
       </div>
