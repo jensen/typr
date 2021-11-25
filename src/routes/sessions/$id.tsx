@@ -89,7 +89,7 @@ export default function Session() {
 
   if (state.matches("started")) {
     return (
-      <div className="space-y-4">
+      <div className="p-4 space-y-4">
         <StatPill label="MISTAKES" value={state.context.mistakeCount} />
         <div className="text-xl font-mono flex flex-col space-y-2">
           {state.context.lines.map((line, index) =>
@@ -119,10 +119,17 @@ export default function Session() {
 
   if (state.matches("created")) {
     return (
-      <p className="text-3xl font-light">
-        Press <span className="text-green-400 font-bold uppercase">Space</span>{" "}
-        to begin.
-      </p>
+      <div className="flex flex-col space-y-2">
+        <p className="text-3xl font-light">
+          Press{" "}
+          <span className="text-green-400 font-bold uppercase">Space</span> to
+          begin.
+        </p>
+        <p className="text-sm text-gray-400">or press this button</p>
+        <Button sm intent="secondary" onClick={() => send("START")}>
+          Start
+        </Button>
+      </div>
     );
   }
 
