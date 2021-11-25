@@ -75,6 +75,8 @@ As with all first attempts at a framework, mistakes were made. The situation I f
 
 The typing interface uses xstate to manage the data model for the typing input. The results are calculated from various values that are recorded as the user types.
 
+![image](https://user-images.githubusercontent.com/14803/143401906-de59d765-4adc-4bff-9ee0-e490f5dc530a.png)
+
 The user can idle until they press space or click the start button. This action sends the the `START` event to the state machine causing a transition to the `started` state. On entry to the `started` state the context will be updated with the current time as `timeStarted`.
 
 As the user types it will keep track of their input by sending an `INPUT` event as the input string grows. The `INPUT` event is the most complicated one in the machine.
