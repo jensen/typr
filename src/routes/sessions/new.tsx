@@ -43,7 +43,7 @@ const handleAction: AuthedActionFunction = ({ request, supabase }) => {
 
       return supabase
         .from("sessions")
-        .insert([{ lines: data.getAll("line") }])
+        .insert([{ title: data.get("title"), lines: data.getAll("line") }])
         .then(({ data, error }) => {
           const [session] = data || [];
 
