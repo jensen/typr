@@ -12,6 +12,8 @@ https://user-images.githubusercontent.com/14803/143400503-9fc6a3f2-8019-4cae-9c1
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/7ebd59d9-9d26-458b-99e4-69c1c8a26a34/deploy-status)](https://app.netlify.com/sites/typr-group-learn/deploys)
 
+> All of the lyrics used in the four demo sessions were written by my brother [Harris Allan](https://harrisallan.com). The songs can be found on his [YouTube](https://harrisallan.com/youtube) channel and [Spotify](https://harrisallan.com/spotify).
+
 ## Project Features
 
 ### User Stories
