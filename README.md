@@ -136,4 +136,14 @@ The Remix documentation uses async/await heavily. I don't really have a preferen
 
 The backend is hosted by supabase. I chose to use discord as a provider since the group is discord based. The user can view sessions and try the typing input without logging in. If the user wants to compete with others then they must login.
 
-The process for handling this login with the browser based library
+The process for authenticating with the supabase client requires some coordination between the browser and the server.
+
+1. Present the user with a login button.
+2. Redirect user back to the site after login.
+3. Wait for supabase auth to emit the event for the auth state change.
+4. Submit a post request with the token.
+5. Handle post request, creating a cookie with the token.
+
+Since I need to make requests on the server with the authed user, I am creating a supabase client and providing the token. This is normally handled by the client library.
+
+Both Remix and supabase are early in development. Getting it to work was the goal.
