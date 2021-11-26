@@ -69,7 +69,7 @@ The previous submissions were architected as single page applications with cache
 
 ### Remix
 
-As with all first attempts at a framework, mistakes were made. The situation I faced was one where I would read documentation telling me not to do the thing I just did. This is what I meant when I claimed I was able to explore Remix. I now have a good baseline for refactoring, it can be more idiomatic to Remix.
+As with all first attempts at a framework, mistakes were made. The situation I faced was one where I would read documentation telling me not to do the thing I just did. This is what I meant when I claimed I was able to explore Remix. I now have a good baseline for refactoring.
 
 > It should be noted that I customized the folder structure slightly. I switched `app` to `src` as an example. No major changes, but leaping head first into convention is hard.
 
@@ -79,7 +79,7 @@ The typing interface uses xstate to manage the data model for the typing input. 
 
 ![image](https://user-images.githubusercontent.com/14803/143401906-de59d765-4adc-4bff-9ee0-e490f5dc530a.png)
 
-The user can idle until they press space or click the start button. This action sends the the `START` event to the state machine causing a transition to the `started` state. On entry to the `started` state the context will be updated with the current time as `timeStarted`.
+The user can idle until they press space or click the start button. This action sends the `START` event to the state machine causing a transition to the `started` state. On entry to the `started` state the context will be updated with the current time as `timeStarted`.
 
 As the user types it will keep track of their input by sending an `INPUT` event as the input string grows. The `INPUT` event is the most complicated one in the machine.
 
@@ -146,6 +146,6 @@ The process for authenticating with the supabase client requires some coordinati
 4. Submit a post request with the token.
 5. Handle post request, creating a cookie with the token.
 
-Since I need to make requests on the server with the authed user, I am creating a supabase client and providing the token. This is normally handled by the client library.
+Since I need to make requests on the server with the authenticated user, I am creating a supabase client and providing the token. This is normally handled by the client library.
 
 Both Remix and supabase are early in development. Getting it to work was the goal.
